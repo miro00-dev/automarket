@@ -550,6 +550,210 @@ a {
   font-size: 3rem;
 }
 
+.details-page {
+  min-height: 100vh;
+  background: var(--am-surface);
+}
+
+.details-content {
+  padding: 8.5rem 0 clamp(5rem, 9vw, 7rem);
+}
+
+.details-breadcrumb a {
+  color: var(--am-primary);
+  text-decoration: none;
+}
+
+.details-year {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--am-muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.details-content h1 {
+  letter-spacing: -0.045em;
+}
+
+.details-price {
+  color: var(--am-primary);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  white-space: nowrap;
+}
+
+.details-image {
+  position: relative;
+  display: grid;
+  min-height: clamp(300px, 48vw, 540px);
+  overflow: hidden;
+  border: 1px solid var(--am-border);
+  border-radius: calc(var(--am-radius) * 1.2);
+  place-items: center;
+}
+
+.details-image::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.95), transparent 42%);
+}
+
+.details-image img {
+  position: relative;
+  z-index: 1;
+  width: min(92%, 760px);
+  filter: drop-shadow(0 24px 22px rgba(15, 23, 42, 0.2));
+}
+
+.details-panel,
+.seller-card,
+.not-found-card {
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius);
+  background: #fff;
+}
+
+.specification-item {
+  display: flex;
+  min-height: 88px;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.9rem;
+  border-radius: 0.75rem;
+  background: var(--am-surface);
+}
+
+.specification-icon {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  color: var(--am-primary);
+  font-size: 1.05rem;
+  border-radius: 0.65rem;
+  background: #eaf2ff;
+  place-items: center;
+}
+
+.specification-item small,
+.specification-item strong {
+  display: block;
+}
+
+.specification-item small {
+  margin-bottom: 0.15rem;
+  color: var(--am-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.specification-item strong {
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.details-description {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.seller-card {
+  position: sticky;
+  top: 6.5rem;
+  box-shadow: var(--am-shadow);
+}
+
+.seller-profile,
+.seller-phone {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.seller-profile {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--am-border);
+}
+
+.seller-avatar {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: 0 0 auto;
+  color: var(--am-primary);
+  font-size: 1.35rem;
+  border-radius: 50%;
+  background: #eaf2ff;
+  place-items: center;
+}
+
+.seller-profile strong,
+.seller-profile span,
+.seller-phone small,
+.seller-phone strong {
+  display: block;
+}
+
+.seller-profile span,
+.seller-phone small {
+  color: var(--am-muted);
+  font-size: 0.78rem;
+}
+
+.seller-phone {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: var(--am-surface);
+}
+
+.seller-phone > i {
+  color: var(--am-primary);
+  font-size: 1.2rem;
+}
+
+.seller-note {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: var(--am-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.seller-note i {
+  color: #16a34a;
+  font-size: 0.95rem;
+}
+
+.not-found-card {
+  max-width: 680px;
+  margin: 4rem auto;
+  padding-block: clamp(3rem, 8vw, 5rem);
+}
+
+.not-found-card p {
+  max-width: 500px;
+}
+
+.not-found-icon {
+  display: grid;
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto 1.5rem;
+  color: var(--am-primary);
+  font-size: 2.1rem;
+  border-radius: 50%;
+  background: #eaf2ff;
+  place-items: center;
+}
+
 @media (max-width: 1199.98px) {
   .navbar-collapse {
     margin-top: 1rem;
@@ -564,6 +768,7 @@ a {
 @media (max-width: 991.98px) {
   .hero-section { min-height: auto; padding: 10.5rem 0 10rem; }
   .search-section { margin-top: -6rem; }
+  .seller-card { position: static; }
 }
 
 @media (max-width: 575.98px) {
@@ -575,6 +780,9 @@ a {
   .page-hero { padding: 8.75rem 0 7rem; }
   .browse-filters { margin-top: -3rem; }
   .results-toolbar { padding-top: 3rem; }
+  .details-content { padding-top: 7.5rem; }
+  .details-image { min-height: 260px; }
+  .specification-item { min-height: 105px; align-items: flex-start; flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {

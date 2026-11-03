@@ -3,15 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AutoMarket car details" />
+    <meta name="description" content="View vehicle details and seller information on AutoMarket." />
     <title>AutoMarket | Car Details</title>
   </head>
   <body>
-    <main class="container py-5" id="main-content">
-      <h1>Car Details</h1>
-      <p class="text-body-secondary">Car details will be added in a later step.</p>
-      <a href="/" class="btn btn-outline-primary">Back to Home</a>
+    <header id="site-header"></header>
+
+    <main class="details-page" id="main-content">
+      <section class="details-content">
+        <div class="container">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb details-breadcrumb mb-4">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/pages/cars.html">Browse Cars</a></li>
+              <li class="breadcrumb-item active" aria-current="page" id="details-breadcrumb-name">Car Details</li>
+            </ol>
+          </nav>
+          <div id="car-details-content"></div>
+          <section class="not-found-card text-center d-none" id="car-not-found" role="status">
+            <span class="not-found-icon"><i class="bi bi-car-front" aria-hidden="true"></i></span>
+            <span class="section-kicker">Nothing here</span>
+            <h1 class="display-5 fw-bold">Car not found</h1>
+            <p class="text-secondary mx-auto">
+              We couldn’t find a demo vehicle with that ID. It may have been removed or the link may be incorrect.
+            </p>
+            <a class="btn btn-primary mt-2" href="/pages/cars.html">
+              <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Back to Browse Cars
+            </a>
+          </section>
+        </div>
+      </section>
     </main>
+
+    <footer id="site-footer"></footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

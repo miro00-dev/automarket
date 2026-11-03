@@ -4,6 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import './styles/base.css'
 import { renderSiteFooter, renderSiteHeader } from './components/site-layout.js'
 import { initializeBrowseCarsPage } from './pages/browse-cars.js'
+import { initializeCarDetailsPage } from './pages/car-details.js'
 import { initializeHomePage } from './pages/home.js'
 
 // Shared application entry point for every AutoMarket page.
@@ -13,3 +14,4 @@ renderSiteHeader()
 renderSiteFooter()
 initializeHomePage()
 initializeBrowseCarsPage()
+initializeCarDetailsPage()

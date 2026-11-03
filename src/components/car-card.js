@@ -1,10 +1,4 @@
-const priceFormatter = new Intl.NumberFormat('en-IE', {
-  style: 'currency',
-  currency: 'EUR',
-  maximumFractionDigits: 0,
-})
-
-const mileageFormatter = new Intl.NumberFormat('en-US')
+import { mileageFormatter, priceFormatter } from '../utils/formatters.js'
 
 export function createCarCard(car, { showTransmission = false } = {}) {
   const transmission = showTransmission
