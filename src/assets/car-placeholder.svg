@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">Car image placeholder</title>
+  <desc id="desc">A clean side-profile illustration of a modern car</desc>
+  <g fill="none" fill-rule="evenodd">
+    <ellipse cx="360" cy="294" rx="270" ry="20" fill="#111827" opacity=".12"/>
+    <path d="M116 243c8-35 27-57 57-67l86-29c27-37 60-58 100-63h100c36 3 67 18 94 45l44 46c35 8 56 26 65 54l4 25c-1 14-13 25-27 25h-32c-4-43-29-68-74-68-44 0-70 25-75 68H262c-4-43-30-68-75-68-44 0-69 25-74 67H86c-15 0-27-12-27-27v-19c0-17 13-31 30-34l27-5Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="5"/>
+    <path d="m281 151 40-42c12-13 29-20 47-20h81c24 1 45 11 62 28l50 53-280-19Z" fill="#1E293B" opacity=".92"/>
+    <path d="m348 93-26 61 111 8-4-69h-81Zm96 1 4 69 103 7-48-50c-15-15-35-24-59-26Z" fill="#B8D9F3" opacity=".85"/>
+    <path d="M104 217h64M596 204h49" stroke="#94A3B8" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="188" cy="278" r="49" fill="#111827"/>
+    <circle cx="188" cy="278" r="24" fill="#94A3B8"/>
+    <circle cx="534" cy="278" r="49" fill="#111827"/>
+    <circle cx="534" cy="278" r="24" fill="#94A3B8"/>
+    <path d="M292 180h48" stroke="#64748B" stroke-width="5" stroke-linecap="round"/>
+    <path d="M450 165v97" stroke="#CBD5E1" stroke-width="4"/>
+  </g>
+</svg>

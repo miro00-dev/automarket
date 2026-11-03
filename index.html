@@ -3,20 +3,160 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AutoMarket home page" />
+    <meta
+      name="description"
+      content="Find, compare, and sell cars with AutoMarket, a modern online car marketplace."
+    />
     <title>AutoMarket | Home</title>
   </head>
   <body>
-    <header class="border-bottom bg-body-tertiary">
-      <nav class="container py-3" aria-label="Main navigation">
-        <a class="navbar-brand fw-semibold" href="/">AutoMarket</a>
-      </nav>
-    </header>
+    <header id="site-header"></header>
 
-    <main class="container py-5" id="main-content">
-      <h1>AutoMarket</h1>
-      <p class="text-body-secondary">The AutoMarket home page is ready for development.</p>
+    <main id="main-content">
+      <section class="hero-section position-relative overflow-hidden">
+        <div class="hero-shape hero-shape-one" aria-hidden="true"></div>
+        <div class="hero-shape hero-shape-two" aria-hidden="true"></div>
+        <div class="container position-relative">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+              <span class="eyebrow text-uppercase">Your road starts here</span>
+              <h1 class="display-2 fw-bold mt-3 mb-4">Find Your Next Car</h1>
+              <p class="hero-copy mb-4">
+                Explore quality vehicles, compare the details that matter, and find a car that
+                fits your life—all in one trusted marketplace.
+              </p>
+              <div class="d-flex flex-column flex-sm-row gap-3">
+                <a class="btn btn-primary btn-lg" href="/pages/cars.html">
+                  Browse Cars <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-outline-light btn-lg" href="/pages/add-car.html">Sell Your Car</a>
+              </div>
+            </div>
+            <div class="col-lg-5 d-none d-lg-block" aria-hidden="true">
+              <div class="hero-visual">
+                <div class="hero-visual-glow"></div>
+                <img src="/src/assets/car-placeholder.svg" alt="" />
+                <div class="hero-stat shadow-sm">
+                  <i class="bi bi-shield-check"></i>
+                  <span><strong>Clear details</strong><small>Shop with confidence</small></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="search-section" aria-labelledby="search-title">
+        <div class="container">
+          <form class="search-panel shadow-lg" id="car-search-form">
+            <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
+              <div>
+                <span class="section-kicker">Quick search</span>
+                <h2 class="h3 mb-0" id="search-title">What are you looking for?</h2>
+              </div>
+              <i class="bi bi-sliders search-panel-icon" aria-hidden="true"></i>
+            </div>
+            <div class="row g-3 align-items-end">
+              <div class="col-sm-6 col-lg-2">
+                <label class="form-label" for="make">Make</label>
+                <select class="form-select" id="make" name="make">
+                  <option value="">Any make</option>
+                  <option>BMW</option>
+                  <option>Mercedes-Benz</option>
+                  <option>Audi</option>
+                  <option>Volkswagen</option>
+                  <option>Toyota</option>
+                  <option>Ford</option>
+                </select>
+              </div>
+              <div class="col-sm-6 col-lg-2">
+                <label class="form-label" for="model">Model</label>
+                <input class="form-control" id="model" name="model" type="text" placeholder="Any model" />
+              </div>
+              <div class="col-sm-6 col-lg-2">
+                <label class="form-label" for="min-price">Minimum price</label>
+                <input class="form-control" id="min-price" name="minPrice" type="number" min="0" placeholder="€0" />
+              </div>
+              <div class="col-sm-6 col-lg-2">
+                <label class="form-label" for="max-price">Maximum price</label>
+                <input class="form-control" id="max-price" name="maxPrice" type="number" min="0" placeholder="No limit" />
+              </div>
+              <div class="col-sm-6 col-lg-2">
+                <label class="form-label" for="fuel-type">Fuel type</label>
+                <select class="form-select" id="fuel-type" name="fuelType">
+                  <option value="">Any fuel</option>
+                  <option>Petrol</option>
+                  <option>Diesel</option>
+                  <option>Hybrid</option>
+                  <option>Electric</option>
+                </select>
+              </div>
+              <div class="col-sm-6 col-lg-2 d-grid">
+                <button class="btn btn-primary" type="submit">
+                  <i class="bi bi-search me-2" aria-hidden="true"></i>Search
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="section-space" aria-labelledby="featured-title">
+        <div class="container">
+          <div class="section-heading d-md-flex align-items-end justify-content-between gap-4">
+            <div>
+              <span class="section-kicker">Hand-picked for you</span>
+              <h2 class="display-6 fw-bold mb-0" id="featured-title">Featured Cars</h2>
+            </div>
+            <a class="view-all-link mt-3 mt-md-0" href="/pages/cars.html">
+              View all cars <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="row g-4" id="featured-cars"></div>
+        </div>
+      </section>
+
+      <section class="popular-makes section-space bg-body-tertiary" aria-labelledby="makes-title">
+        <div class="container">
+          <div class="text-center section-heading mx-auto">
+            <span class="section-kicker">Start with a name you know</span>
+            <h2 class="display-6 fw-bold mb-0" id="makes-title">Popular Makes</h2>
+          </div>
+          <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3" id="popular-makes"></div>
+        </div>
+      </section>
+
+      <section class="section-space" aria-labelledby="benefits-title">
+        <div class="container">
+          <div class="row g-5 align-items-center">
+            <div class="col-lg-4">
+              <span class="section-kicker">Built for car buyers</span>
+              <h2 class="display-6 fw-bold mb-3" id="benefits-title">Why AutoMarket?</h2>
+              <p class="text-secondary mb-0">
+                A focused marketplace experience that makes it easier to discover and compare your
+                next vehicle.
+              </p>
+            </div>
+            <div class="col-lg-8">
+              <div class="row g-4" id="benefits"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container pb-5">
+        <div class="cta-panel d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4">
+          <div>
+            <span class="eyebrow text-uppercase">Ready to make a move?</span>
+            <h2 class="h1 fw-bold mt-2 mb-2">Turn your parked car into an opportunity.</h2>
+            <p class="mb-0 text-white-50">Create your listing and reach interested car buyers.</p>
+          </div>
+          <a class="btn btn-light btn-lg flex-shrink-0" href="/pages/add-car.html">List Your Car</a>
+        </div>
+      </section>
     </main>
+
+    <footer id="site-footer"></footer>
 
     <script type="module" src="/src/main.js"></script>
   </body>
