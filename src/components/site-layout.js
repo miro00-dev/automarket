@@ -7,14 +7,20 @@ const navigationItems = [
 ]
 
 function createNavigationLinks() {
+  const currentPath = window.location.pathname
+
   return navigationItems
     .map(
-      ({ label, href }) => `
+      ({ label, href }) => {
+        const isActive = href === '/' ? currentPath === '/' || currentPath === '/index.html' : currentPath === href
+
+        return `
         <li class="nav-item">
-          <a class="nav-link${href === '/' ? ' active' : ''}" href="${href}"${
-            href === '/' ? ' aria-current="page"' : ''
+          <a class="nav-link${isActive ? ' active' : ''}" href="${href}"${
+            isActive ? ' aria-current="page"' : ''
           }>${label}</a>
-        </li>`,
+        </li>`
+      },
     )
     .join('')
 }

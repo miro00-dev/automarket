@@ -3,15 +3,119 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Browse cars on AutoMarket" />
-    <title>AutoMarket | Cars</title>
+    <meta
+      name="description"
+      content="Browse and filter demo vehicle listings on the AutoMarket car marketplace."
+    />
+    <title>AutoMarket | Browse Cars</title>
   </head>
   <body>
-    <main class="container py-5" id="main-content">
-      <h1>Cars</h1>
-      <p class="text-body-secondary">Car listings will be added in a later step.</p>
-      <a href="/" class="btn btn-outline-primary">Back to Home</a>
+    <header id="site-header"></header>
+
+    <main id="main-content" class="browse-page">
+      <section class="page-hero">
+        <div class="container position-relative">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb mb-3">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Browse Cars</li>
+            </ol>
+          </nav>
+          <span class="eyebrow text-uppercase">Find the right fit</span>
+          <h1 class="display-3 fw-bold mt-2 mb-3">Browse Cars</h1>
+          <p class="page-hero-copy mb-0">
+            Explore our demo inventory and narrow it down by the details that matter to you.
+          </p>
+        </div>
+      </section>
+
+      <section class="browse-content">
+        <div class="container">
+          <form class="browse-filters shadow-sm" id="browse-filters">
+            <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
+              <div>
+                <span class="section-kicker">Refine results</span>
+                <h2 class="h4 mb-0">Search inventory</h2>
+              </div>
+              <i class="bi bi-sliders search-panel-icon" aria-hidden="true"></i>
+            </div>
+            <div class="row g-3">
+              <div class="col-sm-6 col-xl-3">
+                <label class="form-label" for="browse-make">Make</label>
+                <select class="form-select" id="browse-make" name="make">
+                  <option value="">Any make</option>
+                  <option>BMW</option>
+                  <option>Mercedes-Benz</option>
+                  <option>Audi</option>
+                  <option>Volkswagen</option>
+                  <option>Toyota</option>
+                  <option>Ford</option>
+                </select>
+              </div>
+              <div class="col-sm-6 col-xl-3">
+                <label class="form-label" for="browse-model">Model</label>
+                <input class="form-control" id="browse-model" name="model" type="text" placeholder="Any model" />
+              </div>
+              <div class="col-sm-6 col-xl-3">
+                <label class="form-label" for="browse-min-price">Minimum price</label>
+                <input class="form-control" id="browse-min-price" name="minPrice" type="number" min="0" step="500" placeholder="€0" />
+              </div>
+              <div class="col-sm-6 col-xl-3">
+                <label class="form-label" for="browse-max-price">Maximum price</label>
+                <input class="form-control" id="browse-max-price" name="maxPrice" type="number" min="0" step="500" placeholder="No limit" />
+              </div>
+              <div class="col-sm-6 col-xl-3">
+                <label class="form-label" for="browse-fuel">Fuel type</label>
+                <select class="form-select" id="browse-fuel" name="fuel">
+                  <option value="">Any fuel</option>
+                  <option>Petrol</option>
+                  <option>Diesel</option>
+                  <option>Hybrid</option>
+                  <option>Electric</option>
+                </select>
+              </div>
+              <div class="col-sm-6 col-xl-3">
+                <label class="form-label" for="browse-year">Year</label>
+                <select class="form-select" id="browse-year" name="year">
+                  <option value="">Any year</option>
+                  <option>2023</option>
+                  <option>2022</option>
+                  <option>2021</option>
+                  <option>2020</option>
+                  <option>2019</option>
+                </select>
+              </div>
+              <div class="col-sm-6 col-xl-3 d-grid align-items-end">
+                <button class="btn btn-primary" type="submit">
+                  <i class="bi bi-search me-2" aria-hidden="true"></i>Search cars
+                </button>
+              </div>
+              <div class="col-sm-6 col-xl-3 d-grid align-items-end">
+                <button class="btn btn-outline-secondary" id="clear-filters" type="reset">Clear filters</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="results-toolbar d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+            <div>
+              <span class="section-kicker mb-1">Available vehicles</span>
+              <h2 class="h4 mb-0" id="results-heading">Demo inventory</h2>
+            </div>
+            <p class="results-count mb-0" id="results-count" aria-live="polite"></p>
+          </div>
+
+          <div class="row g-4" id="browse-results" aria-labelledby="results-heading"></div>
+          <div class="empty-results text-center d-none" id="empty-results" role="status">
+            <i class="bi bi-car-front" aria-hidden="true"></i>
+            <h2 class="h4 mt-3">No cars match those filters</h2>
+            <p class="text-secondary mb-3">Try broadening your search or clearing the filters.</p>
+            <button class="btn btn-outline-primary" id="empty-clear-filters" type="button">Clear filters</button>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer id="site-footer"></footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

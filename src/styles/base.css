@@ -460,6 +460,96 @@ a {
   border-top: 1px solid #172033;
 }
 
+.browse-page {
+  min-height: 100vh;
+  background: var(--am-surface);
+}
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 9.5rem 0 7.5rem;
+  color: #fff;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(37, 99, 235, 0.32), transparent 24%),
+    linear-gradient(115deg, #09111f 0%, #101d33 100%);
+}
+
+.page-hero::after {
+  position: absolute;
+  right: -8rem;
+  bottom: -18rem;
+  width: 34rem;
+  height: 34rem;
+  content: "";
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  border-radius: 50%;
+}
+
+.page-hero .container { z-index: 1; }
+
+.page-hero h1 {
+  letter-spacing: -0.05em;
+}
+
+.page-hero-copy {
+  max-width: 640px;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.page-hero .breadcrumb-item,
+.page-hero .breadcrumb-item.active,
+.page-hero .breadcrumb-item::before {
+  color: #94a3b8;
+}
+
+.page-hero .breadcrumb-item a {
+  color: #dbeafe;
+  text-decoration: none;
+}
+
+.browse-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 0 clamp(5rem, 9vw, 7rem);
+}
+
+.browse-filters {
+  margin-top: -4rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius);
+  background: #fff;
+}
+
+.browse-filters .btn {
+  min-height: 48px;
+}
+
+.results-toolbar {
+  padding: 4rem 0 1.75rem;
+}
+
+.results-count {
+  color: var(--am-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.empty-results {
+  padding: 5rem 1.5rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--am-radius);
+  background: #fff;
+}
+
+.empty-results > i {
+  color: #94a3b8;
+  font-size: 3rem;
+}
+
 @media (max-width: 1199.98px) {
   .navbar-collapse {
     margin-top: 1rem;
@@ -482,6 +572,9 @@ a {
   .search-panel .search-panel-icon { display: none; }
   .car-card-image { min-height: 205px; }
   .make-card { min-height: 135px; padding-inline: 0.5rem; font-size: 0.88rem; }
+  .page-hero { padding: 8.75rem 0 7rem; }
+  .browse-filters { margin-top: -3rem; }
+  .results-toolbar { padding-top: 3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
