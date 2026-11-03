@@ -6,6 +6,7 @@ import { renderSiteFooter, renderSiteHeader } from './components/site-layout.js'
 import { initializeBrowseCarsPage } from './pages/browse-cars.js'
 import { initializeCarDetailsPage } from './pages/car-details.js'
 import { initializeHomePage } from './pages/home.js'
+import { initializeSellCarPage } from './pages/sell-car.js'
 
 // Shared application entry point for every AutoMarket page.
 document.documentElement.classList.add('js-enabled')
@@ -15,3 +16,4 @@ renderSiteFooter()
 initializeHomePage()
 initializeBrowseCarsPage()
 initializeCarDetailsPage()
+initializeSellCarPage()

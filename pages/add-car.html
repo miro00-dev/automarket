@@ -3,15 +3,189 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Add a car to AutoMarket" />
-    <title>AutoMarket | Add Car</title>
+    <meta name="description" content="Create a demo vehicle listing on AutoMarket." />
+    <title>AutoMarket | Sell Your Car</title>
   </head>
   <body>
-    <main class="container py-5" id="main-content">
-      <h1>Add Car</h1>
-      <p class="text-body-secondary">The car submission form will be added in a later step.</p>
-      <a href="/" class="btn btn-outline-primary">Back to Home</a>
+    <header id="site-header"></header>
+
+    <main class="sell-page" id="main-content">
+      <section class="page-hero sell-page-hero">
+        <div class="container position-relative">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb mb-3">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Sell Your Car</li>
+            </ol>
+          </nav>
+          <span class="eyebrow text-uppercase">Reach your next buyer</span>
+          <h1 class="display-3 fw-bold mt-2 mb-3">Sell Your Car</h1>
+          <p class="page-hero-copy mb-0">
+            Add the key details buyers need. This demonstration form validates your listing without saving or uploading data.
+          </p>
+        </div>
+      </section>
+
+      <section class="sell-content">
+        <div class="container">
+          <div class="row g-4 g-xl-5">
+            <div class="col-lg-8">
+              <form class="listing-form" id="listing-form" novalidate>
+                <div class="alert alert-success listing-success d-none" id="listing-success" role="status" tabindex="-1">
+                  <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                  <div>
+                    <strong>Your demo listing is ready to be published.</strong>
+                    <p class="mb-0">Nothing has been saved or uploaded. Supabase publishing will be connected in a later step.</p>
+                  </div>
+                </div>
+
+                <section class="form-section" aria-labelledby="vehicle-details-title">
+                  <div class="form-section-heading">
+                    <span class="form-step">01</span>
+                    <div>
+                      <span class="section-kicker">The essentials</span>
+                      <h2 class="h3 mb-0" id="vehicle-details-title">Vehicle details</h2>
+                    </div>
+                  </div>
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <label class="form-label" for="listing-make">Make <span aria-hidden="true">*</span></label>
+                      <select class="form-select" id="listing-make" name="make" required>
+                        <option value="">Select a make</option>
+                        <option>BMW</option><option>Mercedes-Benz</option><option>Audi</option>
+                        <option>Volkswagen</option><option>Toyota</option><option>Ford</option><option>Other</option>
+                      </select>
+                      <div class="invalid-feedback">Please select the vehicle make.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="listing-model">Model <span aria-hidden="true">*</span></label>
+                      <input class="form-control" id="listing-model" name="model" type="text" placeholder="e.g. 3 Series" maxlength="60" required />
+                      <div class="invalid-feedback">Please enter the vehicle model.</div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                      <label class="form-label" for="listing-year">Year <span aria-hidden="true">*</span></label>
+                      <input class="form-control" id="listing-year" name="year" type="number" min="1950" step="1" placeholder="e.g. 2021" required />
+                      <div class="invalid-feedback" id="listing-year-error">Enter a valid model year.</div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                      <label class="form-label" for="listing-price">Price in EUR <span aria-hidden="true">*</span></label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text">€</span>
+                        <input class="form-control" id="listing-price" name="price" type="number" min="1" step="1" placeholder="e.g. 32900" required />
+                        <div class="invalid-feedback" id="listing-price-error">Enter a price greater than €0.</div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                      <label class="form-label" for="listing-mileage">Mileage in km <span aria-hidden="true">*</span></label>
+                      <input class="form-control" id="listing-mileage" name="mileage" type="number" min="0" step="1" placeholder="e.g. 48000" required />
+                      <div class="invalid-feedback" id="listing-mileage-error">Enter a valid mileage of 0 km or more.</div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                      <label class="form-label" for="listing-fuel">Fuel type <span aria-hidden="true">*</span></label>
+                      <select class="form-select" id="listing-fuel" name="fuel" required>
+                        <option value="">Select fuel type</option>
+                        <option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option><option>LPG</option>
+                      </select>
+                      <div class="invalid-feedback">Please select a fuel type.</div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                      <label class="form-label" for="listing-transmission">Transmission <span aria-hidden="true">*</span></label>
+                      <select class="form-select" id="listing-transmission" name="transmission" required>
+                        <option value="">Select transmission</option>
+                        <option>Automatic</option><option>Manual</option>
+                      </select>
+                      <div class="invalid-feedback">Please select a transmission.</div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="listing-engine">Engine / power <span aria-hidden="true">*</span></label>
+                      <input class="form-control" id="listing-engine" name="engine" type="text" placeholder="e.g. 2.0 L, 190 hp" maxlength="80" required />
+                      <div class="invalid-feedback">Please enter the engine or power details.</div>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label" for="listing-location">Location <span aria-hidden="true">*</span></label>
+                      <input class="form-control" id="listing-location" name="location" type="text" placeholder="e.g. Sofia, Bulgaria" maxlength="100" required />
+                      <div class="invalid-feedback">Please enter the vehicle location.</div>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label" for="listing-description">Vehicle description <span aria-hidden="true">*</span></label>
+                      <textarea class="form-control" id="listing-description" name="description" rows="6" minlength="30" maxlength="1200" placeholder="Describe the vehicle’s condition, equipment, service history, and anything else a buyer should know." required></textarea>
+                      <div class="d-flex justify-content-between gap-3 mt-2">
+                        <div class="invalid-feedback mt-0">Please provide at least 30 characters.</div>
+                        <small class="character-count" id="description-count">0 / 1200</small>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="form-section" aria-labelledby="seller-details-title">
+                  <div class="form-section-heading">
+                    <span class="form-step">02</span>
+                    <div>
+                      <span class="section-kicker">How buyers reach you</span>
+                      <h2 class="h3 mb-0" id="seller-details-title">Seller information</h2>
+                    </div>
+                  </div>
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <label class="form-label" for="seller-name">Seller name <span aria-hidden="true">*</span></label>
+                      <input class="form-control" id="seller-name" name="sellerName" type="text" autocomplete="name" placeholder="Your full name" maxlength="80" required />
+                      <div class="invalid-feedback">Please enter the seller name.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="seller-phone">Seller phone number <span aria-hidden="true">*</span></label>
+                      <input class="form-control" id="seller-phone" name="sellerPhone" type="tel" autocomplete="tel" placeholder="e.g. +359 88 555 0101" pattern="[+0-9 ()-]{7,20}" required />
+                      <div class="invalid-feedback">Enter a valid phone number using 7–20 digits or common phone symbols.</div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="form-section" aria-labelledby="vehicle-photo-title">
+                  <div class="form-section-heading">
+                    <span class="form-step">03</span>
+                    <div>
+                      <span class="section-kicker">Optional for this demo</span>
+                      <h2 class="h3 mb-0" id="vehicle-photo-title">Vehicle image</h2>
+                    </div>
+                  </div>
+                  <label class="upload-field" for="vehicle-image">
+                    <i class="bi bi-cloud-arrow-up" aria-hidden="true"></i>
+                    <strong>Choose a vehicle image</strong>
+                    <span id="image-file-name">JPG, PNG, or WebP. The image will not be uploaded yet.</span>
+                    <input class="visually-hidden" id="vehicle-image" name="image" type="file" accept="image/jpeg,image/png,image/webp" />
+                  </label>
+                  <div class="invalid-feedback d-block d-none" id="vehicle-image-error">Please select a JPG, PNG, or WebP image.</div>
+                </section>
+
+                <div class="publish-bar">
+                  <p class="mb-0"><i class="bi bi-info-circle" aria-hidden="true"></i> Required fields are marked with an asterisk.</p>
+                  <button class="btn btn-primary btn-lg" type="submit">
+                    <i class="bi bi-megaphone me-2" aria-hidden="true"></i>Publish Listing
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <aside class="col-lg-4">
+              <div class="listing-tips">
+                <span class="section-kicker">A stronger listing</span>
+                <h2 class="h4 mb-4">Tips before you publish</h2>
+                <ul class="list-unstyled mb-0">
+                  <li><i class="bi bi-check2" aria-hidden="true"></i><span><strong>Be accurate</strong>Use current mileage and honest condition details.</span></li>
+                  <li><i class="bi bi-check2" aria-hidden="true"></i><span><strong>Add context</strong>Mention service history and useful equipment.</span></li>
+                  <li><i class="bi bi-check2" aria-hidden="true"></i><span><strong>Use a clear photo</strong>A bright exterior image helps buyers understand the car.</span></li>
+                </ul>
+                <div class="demo-notice">
+                  <i class="bi bi-database-slash" aria-hidden="true"></i>
+                  <p class="mb-0">This form is a front-end demonstration. No listing or image is sent to a server.</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer id="site-footer"></footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

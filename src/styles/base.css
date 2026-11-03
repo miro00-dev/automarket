@@ -754,6 +754,216 @@ a {
   place-items: center;
 }
 
+.sell-page {
+  min-height: 100vh;
+  background: var(--am-surface);
+}
+
+.sell-page-hero {
+  padding-bottom: 8.5rem;
+}
+
+.sell-content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: clamp(5rem, 9vw, 7rem);
+}
+
+.listing-form,
+.listing-tips {
+  margin-top: -4rem;
+}
+
+.form-section {
+  padding: clamp(1.4rem, 4vw, 2.25rem);
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius);
+  background: #fff;
+}
+
+.form-section + .form-section {
+  margin-top: 1.5rem;
+}
+
+.form-section-heading {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--am-border);
+}
+
+.form-step {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  color: var(--am-primary);
+  font-size: 0.78rem;
+  font-weight: 900;
+  border-radius: 0.75rem;
+  background: #eaf2ff;
+  place-items: center;
+}
+
+.listing-form .form-label span {
+  color: #dc2626;
+}
+
+.listing-form textarea.form-control {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.listing-form .input-group-text {
+  min-width: 46px;
+  justify-content: center;
+  color: #475569;
+  border-color: var(--am-border);
+  background: var(--am-surface);
+}
+
+.character-count {
+  flex: 0 0 auto;
+  color: var(--am-muted);
+}
+
+.upload-field {
+  display: flex;
+  min-height: 190px;
+  padding: 2rem;
+  cursor: pointer;
+  text-align: center;
+  border: 2px dashed #cbd5e1;
+  border-radius: 0.9rem;
+  background: var(--am-surface);
+  transition: border-color 180ms ease, background-color 180ms ease;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-field:hover,
+.upload-field:focus-within {
+  border-color: #60a5fa;
+  background: #eff6ff;
+}
+
+.upload-field > i {
+  margin-bottom: 0.75rem;
+  color: var(--am-primary);
+  font-size: 2.25rem;
+}
+
+.upload-field span {
+  margin-top: 0.35rem;
+  color: var(--am-muted);
+  font-size: 0.85rem;
+}
+
+.publish-bar {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius);
+  background: #fff;
+}
+
+.publish-bar p {
+  color: var(--am-muted);
+  font-size: 0.82rem;
+}
+
+.listing-success {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.8rem;
+}
+
+.listing-success > i {
+  margin-top: 0.1rem;
+  font-size: 1.25rem;
+}
+
+.listing-success p {
+  margin-top: 0.2rem;
+  font-size: 0.86rem;
+}
+
+.listing-tips {
+  position: sticky;
+  top: 6.5rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius);
+  background: #fff;
+  box-shadow: var(--am-shadow);
+}
+
+.listing-tips li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+
+.listing-tips li + li {
+  margin-top: 1.25rem;
+}
+
+.listing-tips li > i {
+  display: grid;
+  width: 1.6rem;
+  height: 1.6rem;
+  flex: 0 0 auto;
+  color: #15803d;
+  border-radius: 50%;
+  background: #dcfce7;
+  place-items: center;
+}
+
+.listing-tips li strong,
+.listing-tips li span {
+  display: block;
+}
+
+.listing-tips li span {
+  color: var(--am-muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.listing-tips li strong {
+  margin-bottom: 0.15rem;
+  color: var(--am-ink);
+  font-size: 0.95rem;
+}
+
+.demo-notice {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  margin-top: 1.75rem;
+  padding: 1rem;
+  color: #475569;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  border-radius: 0.75rem;
+  background: var(--am-surface);
+}
+
+.demo-notice i {
+  color: var(--am-primary);
+  font-size: 1.1rem;
+}
+
 @media (max-width: 1199.98px) {
   .navbar-collapse {
     margin-top: 1rem;
@@ -769,6 +979,7 @@ a {
   .hero-section { min-height: auto; padding: 10.5rem 0 10rem; }
   .search-section { margin-top: -6rem; }
   .seller-card { position: static; }
+  .listing-tips { position: static; margin-top: 0; }
 }
 
 @media (max-width: 575.98px) {
@@ -783,6 +994,10 @@ a {
   .details-content { padding-top: 7.5rem; }
   .details-image { min-height: 260px; }
   .specification-item { min-height: 105px; align-items: flex-start; flex-direction: column; }
+  .sell-page-hero { padding-bottom: 7rem; }
+  .listing-form { margin-top: -3rem; }
+  .publish-bar { align-items: stretch; flex-direction: column; }
+  .publish-bar .btn { width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
