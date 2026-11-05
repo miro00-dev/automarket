@@ -3,15 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Create an AutoMarket account" />
+    <meta name="description" content="Create your AutoMarket account." />
     <title>AutoMarket | Register</title>
   </head>
   <body>
-    <main class="container py-5" id="main-content">
-      <h1>Register</h1>
-      <p class="text-body-secondary">Registration will be added in a later step.</p>
-      <a href="/" class="btn btn-outline-primary">Back to Home</a>
+    <header id="site-header"></header>
+    <main class="auth-page" id="main-content">
+      <section class="auth-section">
+        <div class="container">
+          <div class="auth-card mx-auto">
+            <div class="auth-card-heading text-center">
+              <span class="auth-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
+              <span class="section-kicker">Join AutoMarket</span>
+              <h1 class="display-6 fw-bold mb-2">Create an account</h1>
+              <p class="text-secondary mb-0">Register with your email and a secure password.</p>
+            </div>
+            <div class="alert alert-danger auth-message d-none" id="register-error" role="alert" tabindex="-1"></div>
+            <div class="alert alert-success auth-message d-none" id="register-success" role="status" tabindex="-1"></div>
+            <form id="register-form" novalidate>
+              <div class="mb-4">
+                <label class="form-label" for="register-email">Email address</label>
+                <input class="form-control" id="register-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+                <div class="invalid-feedback">Enter a valid email address.</div>
+              </div>
+              <div class="mb-4">
+                <label class="form-label" for="register-password">Password</label>
+                <input class="form-control" id="register-password" name="password" type="password" autocomplete="new-password" placeholder="At least 6 characters" minlength="6" required />
+                <div class="invalid-feedback">Use at least 6 characters.</div>
+              </div>
+              <div class="mb-4">
+                <label class="form-label" for="register-password-confirmation">Confirm password</label>
+                <input class="form-control" id="register-password-confirmation" name="passwordConfirmation" type="password" autocomplete="new-password" placeholder="Enter the password again" minlength="6" required />
+                <div class="invalid-feedback" id="password-confirmation-error">Confirm your password.</div>
+              </div>
+              <button class="btn btn-primary btn-lg w-100" type="submit">
+                <span class="spinner-border spinner-border-sm me-2 d-none" data-auth-spinner aria-hidden="true"></span>
+                <i class="bi bi-person-plus me-2" data-auth-icon aria-hidden="true"></i>
+                <span data-auth-label>Create Account</span>
+              </button>
+            </form>
+            <p class="auth-switch text-center mb-0">Already have an account? <a href="/pages/login.html">Login</a></p>
+          </div>
+        </div>
+      </section>
     </main>
+    <footer id="site-footer"></footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

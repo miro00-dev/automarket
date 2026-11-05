@@ -19,13 +19,21 @@
               <li class="breadcrumb-item active" aria-current="page" id="details-breadcrumb-name">Car Details</li>
             </ol>
           </nav>
+          <div class="data-state-notice alert alert-warning d-none" id="details-fallback-notice" role="status">
+            <i class="bi bi-wifi-off me-2" aria-hidden="true"></i>
+            Live vehicle details are temporarily unavailable. Demo details are shown instead.
+          </div>
+          <div class="loading-state text-center" id="details-loading" role="status">
+            <span class="spinner-border text-primary" aria-hidden="true"></span>
+            <p class="mt-3 mb-0">Loading vehicle details…</p>
+          </div>
           <div id="car-details-content"></div>
           <section class="not-found-card text-center d-none" id="car-not-found" role="status">
             <span class="not-found-icon"><i class="bi bi-car-front" aria-hidden="true"></i></span>
             <span class="section-kicker">Nothing here</span>
             <h1 class="display-5 fw-bold">Car not found</h1>
             <p class="text-secondary mx-auto">
-              We couldn’t find a demo vehicle with that ID. It may have been removed or the link may be incorrect.
+              We couldn’t find an active vehicle with that ID. It may have been removed or the link may be incorrect.
             </p>
             <a class="btn btn-primary mt-2" href="/pages/cars.html">
               <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Back to Browse Cars

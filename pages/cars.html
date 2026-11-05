@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Browse and filter demo vehicle listings on the AutoMarket car marketplace."
+      content="Browse and filter active vehicle listings on the AutoMarket car marketplace."
     />
     <title>AutoMarket | Browse Cars</title>
   </head>
@@ -24,7 +24,7 @@
           <span class="eyebrow text-uppercase">Find the right fit</span>
           <h1 class="display-3 fw-bold mt-2 mb-3">Browse Cars</h1>
           <p class="page-hero-copy mb-0">
-            Explore our demo inventory and narrow it down by the details that matter to you.
+            Explore active inventory and narrow it down by the details that matter to you.
           </p>
         </div>
       </section>
@@ -99,16 +99,24 @@
           <div class="results-toolbar d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
             <div>
               <span class="section-kicker mb-1">Available vehicles</span>
-              <h2 class="h4 mb-0" id="results-heading">Demo inventory</h2>
+              <h2 class="h4 mb-0" id="results-heading">Marketplace inventory</h2>
             </div>
             <p class="results-count mb-0" id="results-count" aria-live="polite"></p>
           </div>
 
-          <div class="row g-4" id="browse-results" aria-labelledby="results-heading"></div>
+          <div class="data-state-notice alert alert-warning d-none" id="browse-fallback-notice" role="status">
+            <i class="bi bi-wifi-off me-2" aria-hidden="true"></i>
+            Live listings are temporarily unavailable, so demo vehicles are shown instead.
+          </div>
+          <div class="loading-state text-center" id="browse-loading" role="status">
+            <span class="spinner-border text-primary" aria-hidden="true"></span>
+            <p class="mt-3 mb-0">Loading available cars…</p>
+          </div>
+          <div class="row g-4 d-none" id="browse-results" aria-labelledby="results-heading"></div>
           <div class="empty-results text-center d-none" id="empty-results" role="status">
             <i class="bi bi-car-front" aria-hidden="true"></i>
-            <h2 class="h4 mt-3">No cars match those filters</h2>
-            <p class="text-secondary mb-3">Try broadening your search or clearing the filters.</p>
+            <h2 class="h4 mt-3" id="empty-results-title">No cars match those filters</h2>
+            <p class="text-secondary mb-3" id="empty-results-copy">Try broadening your search or clearing the filters.</p>
             <button class="btn btn-outline-primary" id="empty-clear-filters" type="button">Clear filters</button>
           </div>
         </div>

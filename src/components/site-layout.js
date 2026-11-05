@@ -1,3 +1,5 @@
+import { escapeHtml } from '../utils/html.js'
+
 const navigationItems = [
   { label: 'Home', href: '/' },
   { label: 'Cars', href: '/pages/cars.html' },
@@ -52,13 +54,62 @@ export function renderSiteHeader() {
           <ul class="navbar-nav mx-auto mb-3 mb-xl-0">
             ${createNavigationLinks()}
           </ul>
-          <div class="navbar-actions d-flex flex-column flex-sm-row gap-2">
-            <a class="btn btn-link" href="/pages/login.html">Login</a>
-            <a class="btn btn-primary" href="/pages/register.html">Register</a>
+          <div class="navbar-actions d-flex flex-column flex-sm-row gap-2" id="auth-navigation" aria-live="polite">
+            <span class="auth-nav-loading"><span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span class="visually-hidden">Loading account</span></span>
           </div>
         </div>
       </div>
     </nav>`
+}
+
+export async function initializeAuthNavigation() {
+  const authNavigation = document.querySelector('#auth-navigation')
+  if (!authNavigation) return
+
+  const renderAuthState = (session) => {
+    const user = session?.user
+    if (!user) {
+      authNavigation.innerHTML = `
+        <a class="btn btn-link" href="/pages/login.html">Login</a>
+        <a class="btn btn-primary" href="/pages/register.html">Register</a>`
+      return
+    }
+
+    authNavigation.innerHTML = `
+      <a class="account-email" href="/pages/profile.html" title="My Profile: ${escapeHtml(user.email)}">
+        <i class="bi bi-person-circle" aria-hidden="true"></i>${escapeHtml(user.email)}
+      </a>
+      <a class="btn btn-link" href="/pages/profile.html">My Profile</a>
+      <button class="btn btn-outline-light" id="logout-button" type="button">Logout</button>`
+
+    authNavigation.querySelector('#logout-button')?.addEventListener('click', async (event) => {
+      const button = event.currentTarget
+      button.disabled = true
+      button.textContent = 'Logging out...'
+
+      try {
+        const { logout } = await import('../services/auth-service.js')
+        await logout()
+      } catch (error) {
+        console.error('Supabase logout failed:', error)
+        button.disabled = false
+        button.textContent = 'Logout'
+        const errorText = document.createElement('span')
+        errorText.className = 'auth-nav-error'
+        errorText.textContent = 'Logout failed. Please try again.'
+        authNavigation.prepend(errorText)
+      }
+    })
+  }
+
+  try {
+    const { getCurrentSession, subscribeToAuthChanges } = await import('../services/auth-service.js')
+    renderAuthState(await getCurrentSession())
+    subscribeToAuthChanges(renderAuthState)
+  } catch (error) {
+    console.error('Supabase session could not be restored:', error)
+    renderAuthState(null)
+  }
 }
 
 export function renderSiteFooter() {

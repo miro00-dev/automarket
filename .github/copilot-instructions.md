@@ -7,7 +7,8 @@ AutoMarket is a course capstone project built as a true multi-page web applicati
 - Use Vite, Node.js/npm, vanilla JavaScript, HTML5, CSS3, and Bootstrap 5.
 - Do not introduce React, Vue, TypeScript, or any other frontend framework.
 - Bootstrap must be installed through npm and imported from the shared JavaScript entry point.
-- Supabase will be added later for the database, authentication, and file storage. Keep backend-facing code isolated in `src/services/`; do not add a second backend technology.
+- Supabase is the planned backend for the database, authentication, and file storage. Use the shared client from `src/services/supabase-client.js`, keep backend-facing code isolated in `src/services/`, and do not add a second backend technology.
+- Read Supabase configuration only from `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Never hardcode credentials or use a secret/service-role key in browser code.
 
 ## Architecture
 

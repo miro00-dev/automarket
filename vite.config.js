@@ -9,6 +9,7 @@ const pageNames = [
   'add-car',
   'my-listings',
   'favorites',
+  'profile',
   'admin',
 ]
 
