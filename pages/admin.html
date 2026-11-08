@@ -7,11 +7,33 @@
     <title>AutoMarket | Admin</title>
   </head>
   <body>
-    <main class="container py-5" id="main-content">
-      <h1>Admin</h1>
-      <p class="text-body-secondary">Administration features will be added in a later step.</p>
-      <a href="/" class="btn btn-outline-primary">Back to Home</a>
+    <header id="site-header"></header>
+    <main class="admin-page page-shell" id="main-content">
+      <section class="page-hero compact-page-hero">
+        <div class="container"><span class="eyebrow">Administration</span><h1>Admin Dashboard</h1><p>Review listings, oversee accounts, and monitor marketplace activity.</p></div>
+      </section>
+      <section class="container py-5" id="admin-dashboard">
+        <div class="loading-state text-center" id="admin-loading" role="status"><span class="spinner-border text-primary" aria-hidden="true"></span><p class="mt-3 mb-0">Verifying administrator access...</p></div>
+        <div class="alert alert-danger d-none" id="admin-access-denied" role="alert"><h2 class="h5">Administrator access required</h2><p class="mb-3">Your account is not authorized to open this dashboard.</p><a class="btn btn-outline-danger" href="/">Return home</a></div>
+        <div class="alert alert-danger d-none" id="admin-error" role="alert" tabindex="-1"><strong>Admin request failed.</strong> <span id="admin-error-message"></span></div>
+        <div class="d-none" id="admin-content">
+          <div class="row g-3 mb-5" id="admin-statistics"></div>
+          <section class="admin-panel mb-5" aria-labelledby="admin-listings-heading">
+            <div class="admin-panel-heading"><div><span class="eyebrow">Moderation</span><h2 class="h3 mb-0" id="admin-listings-heading">Car listings</h2></div></div>
+            <div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Vehicle</th><th>Year</th><th>Price</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead><tbody id="admin-listings-body"></tbody></table></div>
+            <p class="text-center text-body-secondary p-4 mb-0 d-none" id="admin-listings-empty">No listings found.</p>
+            <nav class="admin-pagination" aria-label="Car listings pages"><button class="btn btn-sm btn-outline-secondary" type="button" data-page-target="cars" data-page-direction="previous">Previous</button><span id="cars-page-label">Page 1 of 1</span><button class="btn btn-sm btn-outline-secondary" type="button" data-page-target="cars" data-page-direction="next">Next</button></nav>
+          </section>
+          <section class="admin-panel" aria-labelledby="admin-users-heading">
+            <div class="admin-panel-heading"><div><span class="eyebrow">Accounts</span><h2 class="h3 mb-0" id="admin-users-heading">Registered users</h2></div></div>
+            <div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>User</th><th>City</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead><tbody id="admin-users-body"></tbody></table></div>
+            <p class="text-center text-body-secondary p-4 mb-0 d-none" id="admin-users-empty">No registered users found.</p>
+            <nav class="admin-pagination" aria-label="Registered user pages"><button class="btn btn-sm btn-outline-secondary" type="button" data-page-target="users" data-page-direction="previous">Previous</button><span id="users-page-label">Page 1 of 1</span><button class="btn btn-sm btn-outline-secondary" type="button" data-page-target="users" data-page-direction="next">Next</button></nav>
+          </section>
+        </div>
+      </section>
     </main>
+    <footer id="site-footer"></footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

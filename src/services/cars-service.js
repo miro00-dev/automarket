@@ -58,7 +58,7 @@ export async function updateOwnedCar(id, ownerId, listing) {
     .update(listing)
     .eq('id', id)
     .eq('owner_id', ownerId)
-    .select('id')
+    .select(CAR_COLUMNS)
     .maybeSingle()
 
   if (error) throw error

@@ -1,8 +1,14 @@
 const cardTones = ['blue', 'silver', 'red', 'green', 'gold', 'violet']
+const knownCarStatuses = new Set(['active', 'pending', 'rejected'])
 
 function getTone(value) {
   const hash = [...String(value)].reduce((total, character) => total + character.charCodeAt(0), 0)
   return cardTones[hash % cardTones.length]
+}
+
+export function normalizeCarStatus(value) {
+  const status = String(value ?? '').trim().toLowerCase()
+  return knownCarStatuses.has(status) ? status : status || 'unknown'
 }
 
 export function mapDatabaseCar(car) {
@@ -23,5 +29,6 @@ export function mapDatabaseCar(car) {
     tone: getTone(car.make),
     isDemo: false,
     ownerId: car.owner_id || null,
+    status: normalizeCarStatus(car.status),
   }
 }

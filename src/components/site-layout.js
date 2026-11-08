@@ -1,4 +1,5 @@
 import { escapeHtml } from '../utils/html.js'
+import { isCurrentUserAdmin } from '../services/admin-service.js'
 
 const navigationItems = [
   { label: 'Home', href: '/' },
@@ -66,7 +67,9 @@ export async function initializeAuthNavigation() {
   const authNavigation = document.querySelector('#auth-navigation')
   if (!authNavigation) return
 
-  const renderAuthState = (session) => {
+  let renderSequence = 0
+  const renderAuthState = async (session) => {
+    const sequence = ++renderSequence
     const user = session?.user
     if (!user) {
       authNavigation.innerHTML = `
@@ -75,11 +78,21 @@ export async function initializeAuthNavigation() {
       return
     }
 
+    let isAdmin = false
+    try {
+      isAdmin = await isCurrentUserAdmin()
+    } catch (error) {
+      // The migration may not have been applied yet; regular navigation remains usable.
+      console.info('Admin access could not be checked:', error.message)
+    }
+    if (sequence !== renderSequence) return
+
     authNavigation.innerHTML = `
       <a class="account-email" href="/pages/profile.html" title="My Profile: ${escapeHtml(user.email)}">
         <i class="bi bi-person-circle" aria-hidden="true"></i>${escapeHtml(user.email)}
       </a>
       <a class="btn btn-link" href="/pages/profile.html">My Profile</a>
+      ${isAdmin ? '<a class="btn btn-link" href="/pages/admin.html"><i class="bi bi-shield-lock me-1" aria-hidden="true"></i>Admin</a>' : ''}
       <button class="btn btn-outline-light" id="logout-button" type="button">Logout</button>`
 
     authNavigation.querySelector('#logout-button')?.addEventListener('click', async (event) => {
@@ -104,7 +117,7 @@ export async function initializeAuthNavigation() {
 
   try {
     const { getCurrentSession, subscribeToAuthChanges } = await import('../services/auth-service.js')
-    renderAuthState(await getCurrentSession())
+    await renderAuthState(await getCurrentSession())
     subscribeToAuthChanges(renderAuthState)
   } catch (error) {
     console.error('Supabase session could not be restored:', error)

@@ -43,7 +43,6 @@ export function createListingPayload(formData, coverImageUrl = null, ownerId = n
     location: formData.location.trim(),
     description: formData.description.trim(),
     image_url: coverImageUrl,
-    status: 'active',
     owner_id: ownerId,
   }
 }
@@ -197,8 +196,10 @@ export async function initializeSellCarPage() {
       uploadedPaths = uploadResult.paths
       const coverUrl = uploadResult.coverUrl || existingListing?.image_url || null
       const listing = createListingPayload(formValues, coverUrl, session.user.id)
-      if (existingListing) listing.status = existingListing.status
-      if (editId) await updateOwnedCar(editId, session.user.id, listing)
+      if (editId) {
+        delete listing.owner_id
+        await updateOwnedCar(editId, session.user.id, listing)
+      }
       else await createCarListing(listing)
       if (!editId) {
         form.reset()
@@ -209,10 +210,14 @@ export async function initializeSellCarPage() {
       }
       successMessage.querySelector('strong').textContent = editId
         ? 'Your listing was updated successfully.'
-        : 'Your listing was published successfully.'
+        : 'Your listing was submitted for administrator review.'
       successMessage.classList.remove('d-none')
       successMessage.focus()
-      if (editId) window.setTimeout(() => window.location.assign('/pages/my-listings.html'), 900)
+      if (editId) {
+        window.setTimeout(() => {
+          window.location.assign(`/pages/my-listings.html?refreshed=${Date.now()}`)
+        }, 900)
+      }
     } catch (error) {
       if (uploadedPaths.length) {
         try {

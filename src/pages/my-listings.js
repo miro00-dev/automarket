@@ -29,12 +29,17 @@ export async function initializeMyListingsPage() {
   }
   if (!session?.user) return redirectToLogin()
 
-  try {
+  const loadListings = async () => {
+    errorMessage.classList.add('d-none')
     const { getMyCars } = await import('../services/cars-service.js')
     const cars = (await getMyCars(session.user.id)).map(mapDatabaseCar)
     results.innerHTML = cars.map(renderOwnedCard).join('')
     results.classList.toggle('d-none', !cars.length)
     empty.classList.toggle('d-none', Boolean(cars.length))
+  }
+
+  try {
+    await loadListings()
   } catch (error) {
     console.error('Supabase failed to load the current user listings:', error)
     errorMessage.textContent = 'Your listings could not be loaded. Please check your connection and try again.'
@@ -42,6 +47,17 @@ export async function initializeMyListingsPage() {
   } finally {
     loading.classList.add('d-none')
   }
+
+  window.addEventListener('pageshow', async (event) => {
+    if (!event.persisted) return
+    try {
+      await loadListings()
+    } catch (error) {
+      console.error('Supabase failed to refresh My Listings:', error)
+      errorMessage.textContent = 'Your listings could not be refreshed. Please reload the page and try again.'
+      errorMessage.classList.remove('d-none')
+    }
+  })
 
   results.addEventListener('click', async (event) => {
     const button = event.target.closest('[data-delete-listing]')

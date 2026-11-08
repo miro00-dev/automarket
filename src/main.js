@@ -12,6 +12,7 @@ import { initializeFavoritesPage } from './pages/favorites.js'
 import { initializeMyListingsPage } from './pages/my-listings.js'
 import { initializeProfilePage } from './pages/profile.js'
 import { initializeSellCarPage } from './pages/sell-car.js'
+import { initializeAdminPage } from './pages/admin.js'
 
 // Shared application entry point for every AutoMarket page.
 document.documentElement.classList.add('js-enabled')
@@ -27,4 +28,5 @@ initializeProfilePage()
 initializeBrowseCarsPage()
 initializeCarDetailsPage()
 initializeSellCarPage()
+initializeAdminPage()
 initializeFavoritesController()

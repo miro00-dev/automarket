@@ -17,12 +17,14 @@ export function createCarCard(car, { showTransmission = false, actions = '' } = 
         <i class="bi bi-heart" aria-hidden="true"></i>
       </button>`
     : ''
+  const statusLabels = { active: 'ACTIVE LISTING', pending: 'PENDING APPROVAL', rejected: 'REJECTED' }
+  const listingBadge = car.isDemo === false ? (statusLabels[car.status] || 'Listing') : 'Demo listing'
 
   return `
     <div class="col-md-6 col-xl-4">
       <article class="card car-card h-100">
         <div class="car-card-image car-tone-${car.tone}">
-          <span class="demo-badge">${car.isDemo === false ? 'Active listing' : 'Demo listing'}</span>
+          <span class="demo-badge">${listingBadge}</span>
           ${favoriteButton}
           <img class="${car.imageUrl ? 'uploaded-car-image' : ''}" src="${imageUrl}" alt="${make} ${model}" />
         </div>
