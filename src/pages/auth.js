@@ -8,6 +8,9 @@ function getFriendlyAuthError(error, action) {
   if (code === 'weak_password' || message.includes('password should be')) return 'Choose a stronger password with at least 6 characters.'
   if (code === 'over_email_send_rate_limit' || message.includes('rate limit')) return 'Too many attempts were made. Wait a moment and try again.'
 
+  if (action === 'reset-request') return 'The reset email could not be sent. Please wait a moment and try again.'
+  if (action === 'password-update') return 'Your password could not be updated. Request a new recovery link and try again.'
+
   return action === 'register'
     ? 'Your account could not be created. Please check your details and try again.'
     : 'Login failed. Please check your details and try again.'
@@ -109,7 +112,142 @@ function initializeRegisterForm() {
   })
 }
 
+function initializeForgotPasswordForm() {
+  const form = document.querySelector('#forgot-password-form')
+  if (!form) return
+  const errorMessage = document.querySelector('#forgot-password-error')
+  const successMessage = document.querySelector('#forgot-password-success')
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault()
+    errorMessage.classList.add('d-none')
+    successMessage.classList.add('d-none')
+    form.classList.add('was-validated')
+    if (!form.checkValidity()) return form.querySelector(':invalid')?.focus()
+
+    const email = new FormData(form).get('email').trim()
+    setFormLoading(form, true, 'Sending link...', 'Send Reset Link')
+
+    try {
+      const { requestPasswordReset } = await import('../services/auth-service.js')
+      await requestPasswordReset(email)
+      form.reset()
+      form.classList.remove('was-validated')
+      successMessage.textContent = 'If an AutoMarket account exists for that email, a password recovery link has been sent.'
+      successMessage.classList.remove('d-none')
+      successMessage.focus()
+    } catch (error) {
+      console.error('Supabase password reset request failed:', error)
+      errorMessage.textContent = getFriendlyAuthError(error, 'reset-request')
+      errorMessage.classList.remove('d-none')
+      errorMessage.focus()
+    } finally {
+      setFormLoading(form, false, 'Sending link...', 'Send Reset Link')
+    }
+  })
+}
+
+function initializeUpdatePasswordForm() {
+  const form = document.querySelector('#update-password-form')
+  if (!form) return
+
+  const passwordInput = form.querySelector('#new-password')
+  const confirmationInput = form.querySelector('#new-password-confirmation')
+  const confirmationError = form.querySelector('#new-password-confirmation-error')
+  const submitButton = form.querySelector('button[type="submit"]')
+  const checkingMessage = document.querySelector('#recovery-checking')
+  const errorMessage = document.querySelector('#update-password-error')
+  const successMessage = document.querySelector('#update-password-success')
+  const recoveryFlag = 'automarket-password-recovery'
+  let recoverySessionReady = sessionStorage.getItem(recoveryFlag) === 'true'
+
+  const validateConfirmation = () => {
+    const matches = confirmationInput.value === passwordInput.value
+    confirmationInput.setCustomValidity(matches ? '' : 'Passwords do not match.')
+    confirmationError.textContent = matches ? 'Confirm your new password.' : 'The passwords do not match.'
+  }
+
+  const showRecoveryError = (message) => {
+    checkingMessage.classList.add('d-none')
+    errorMessage.textContent = message
+    errorMessage.classList.remove('d-none')
+    errorMessage.focus()
+    submitButton.disabled = true
+  }
+
+  const enableForm = () => {
+    recoverySessionReady = true
+    sessionStorage.setItem(recoveryFlag, 'true')
+    checkingMessage.classList.add('d-none')
+    errorMessage.classList.add('d-none')
+    submitButton.disabled = false
+  }
+
+  const hashParameters = new URLSearchParams(window.location.hash.slice(1))
+  const queryParameters = new URLSearchParams(window.location.search)
+  const recoveryError = hashParameters.get('error_description') || queryParameters.get('error_description')
+  const hasRecoveryParameters = hashParameters.get('type') === 'recovery'
+    || hashParameters.has('access_token')
+    || queryParameters.has('code')
+
+  passwordInput.addEventListener('input', validateConfirmation)
+  confirmationInput.addEventListener('input', validateConfirmation)
+
+  import('../services/auth-service.js').then(async ({ getCurrentSession, subscribeToPasswordRecovery }) => {
+    const unsubscribe = subscribeToPasswordRecovery(enableForm)
+    window.addEventListener('pagehide', unsubscribe, { once: true })
+
+    try {
+      const session = await getCurrentSession()
+      if (recoveryError) {
+        showRecoveryError('This password recovery link is invalid or has expired. Request a new link.')
+      } else if (recoverySessionReady || (hasRecoveryParameters && session?.user)) {
+        enableForm()
+      } else {
+        showRecoveryError('Open this page using the recovery link sent to your email address.')
+      }
+    } catch (error) {
+      console.error('Supabase recovery session could not be verified:', error)
+      showRecoveryError('The recovery link could not be verified. Request a new link and try again.')
+    }
+  }).catch((error) => {
+    console.error('Supabase recovery services could not be loaded:', error)
+    showRecoveryError('The recovery link could not be verified. Please try again later.')
+  })
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault()
+    errorMessage.classList.add('d-none')
+    successMessage.classList.add('d-none')
+    validateConfirmation()
+    form.classList.add('was-validated')
+    if (!recoverySessionReady) return showRecoveryError('Request a new password recovery link before continuing.')
+    if (!form.checkValidity()) return form.querySelector(':invalid')?.focus()
+
+    setFormLoading(form, true, 'Updating password...', 'Set New Password')
+    try {
+      const { updatePassword } = await import('../services/auth-service.js')
+      await updatePassword(passwordInput.value)
+      sessionStorage.removeItem(recoveryFlag)
+      form.reset()
+      form.classList.remove('was-validated')
+      validateConfirmation()
+      successMessage.classList.remove('d-none')
+      successMessage.focus()
+      form.classList.add('d-none')
+    } catch (error) {
+      console.error('Supabase password update failed:', error)
+      errorMessage.textContent = getFriendlyAuthError(error, 'password-update')
+      errorMessage.classList.remove('d-none')
+      errorMessage.focus()
+      setFormLoading(form, false, 'Updating password...', 'Set New Password')
+    }
+  })
+}
+
 export function initializeAuthPages() {
   initializeLoginForm()
   initializeRegisterForm()
+  initializeForgotPasswordForm()
+  initializeUpdatePasswordForm()
 }

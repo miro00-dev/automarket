@@ -6,6 +6,8 @@ const pageNames = [
   'car-details',
   'login',
   'register',
+  'forgot-password',
+  'update-password',
   'add-car',
   'my-listings',
   'favorites',
